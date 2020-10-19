@@ -30,4 +30,16 @@ public class ClienteController {
     public Cliente save( @RequestBody Cliente cliente ) {
         return clienteRepository.save(cliente);
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete( @PathVariable Integer id ) {
+        clienteRepository
+                 .findById(id)
+                 .map(cliente -> {
+                     clienteRepository.delete(cliente);
+                     return Void.TYPE;
+                 })
+                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
+    }
 }
