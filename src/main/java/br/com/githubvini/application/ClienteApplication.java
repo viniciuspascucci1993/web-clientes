@@ -17,21 +17,6 @@ import java.util.Date;
 @SpringBootApplication
 public class ClienteApplication {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
-
-    @Bean
-    public CommandLineRunner runDatas() {
-
-        return args -> {
-            Cliente cliente = new Cliente();
-            cliente.setCpfCnpj("235.255.478-55");
-            cliente.setNome("Vinicius Torres Pascucci");
-
-            clienteRepository.save(cliente);
-        };
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(ClienteApplication.class, args);
     }

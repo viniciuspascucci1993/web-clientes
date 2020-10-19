@@ -1,5 +1,7 @@
 package br.com.githubvini.application.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -35,6 +37,7 @@ public class Cliente {
      * Representa d data de cadastro desse cliente.
      */
     @Column(name = "data_cadastro")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCadastro;
 
     @PrePersist
