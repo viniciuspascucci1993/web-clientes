@@ -28,7 +28,7 @@ public class Cliente {
     /**
      * Representa o cpf ou cnpj do cliente.
      */
-    @Column(nullable = false, length = 11)
+    @Column(nullable = false, length = 14)
     private String cpfCnpj;
 
     /**
@@ -36,6 +36,11 @@ public class Cliente {
      */
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro;
+
+    @PrePersist
+    public void prePersistDate() {
+        setDataCadastro(LocalDate.now());
+    }
 
     /**
      * Construtor default
