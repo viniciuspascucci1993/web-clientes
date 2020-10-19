@@ -1,8 +1,12 @@
 package br.com.githubvini.application.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -25,12 +29,16 @@ public class Cliente {
      * Represemta o nome do cliente.
      */
     @Column(nullable = false, length = 150)
+    @NotEmpty
     private String nome;
 
     /**
      * Representa o cpf ou cnpj do cliente.
      */
     @Column(nullable = false, length = 14)
+    @NotNull
+    @CPF
+    @CNPJ
     private String cpfCnpj;
 
     /**
