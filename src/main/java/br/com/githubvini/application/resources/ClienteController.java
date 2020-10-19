@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+
 /**
  * Classe responsável por ser o provedor e controlador da aplicação.
  * @Author: Vinicius Torres Pascucci.
@@ -27,7 +29,7 @@ public class ClienteController {
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente save( @RequestBody Cliente cliente ) {
+    public Cliente save( @Valid @RequestBody Cliente cliente ) {
         return clienteRepository.save(cliente);
     }
 

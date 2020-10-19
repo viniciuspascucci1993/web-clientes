@@ -29,15 +29,15 @@ public class Cliente {
      * Represemta o nome do cliente.
      */
     @Column(nullable = false, length = 150)
-    @NotEmpty
+    @NotEmpty(message = "{campo.nome.obrigatorio}")
     private String nome;
 
     /**
      * Representa o cpf ou cnpj do cliente.
      */
     @Column(nullable = false, length = 14)
-    @NotNull
-    @CPF
+    @NotNull(message = "{campo.cpf.obrigatorio}")
+    @CPF(message = "{campo.cpf.invalido}")
     @CNPJ
     private String cpfCnpj;
 
