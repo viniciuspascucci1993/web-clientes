@@ -31,6 +31,19 @@ public class ClienteController {
         return clienteRepository.save(cliente);
     }
 
+    @RequestMapping( value = "/{id}", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update( @PathVariable Integer id, @RequestBody Cliente clienteAtualizado ) {
+        clienteRepository
+                .findById(id)
+                .map(cliente -> {
+                   cliente.setNome(clienteAtualizado.getNome());
+                   cliente.setCpfCnpj(clienteAtualizado.getCpfCnpj());
+                   return clienteRepository.save(cliente);
+                })
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete( @PathVariable Integer id ) {
