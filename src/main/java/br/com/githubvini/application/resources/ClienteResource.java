@@ -10,12 +10,12 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 
 /**
- * Classe responsável por ser o provedor e controlador da aplicação.
+ * Classe responsável por ser o provedor e controlador ou resource da aplicação.
  * @Author: Vinicius Torres Pascucci.
  */
 @RestController
 @RequestMapping(value = "/api/clientes")
-public class ClienteController {
+public class ClienteResource {
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -35,7 +35,7 @@ public class ClienteController {
 
     @RequestMapping( value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update( @PathVariable Integer id, @RequestBody Cliente clienteAtualizado ) {
+    public void update( @Valid @PathVariable Integer id, @RequestBody Cliente clienteAtualizado ) {
         clienteRepository
                 .findById(id)
                 .map(cliente -> {
