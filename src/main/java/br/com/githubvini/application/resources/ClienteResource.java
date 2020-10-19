@@ -23,7 +23,7 @@ public class ClienteResource {
     @RequestMapping( value = "/{id}", method = RequestMethod.GET)
     public Cliente findById( @PathVariable Integer id ) {
         return clienteRepository.findById(id).orElseThrow(
-                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado")
         );
     }
 
@@ -43,7 +43,7 @@ public class ClienteResource {
                    cliente.setCpfCnpj(clienteAtualizado.getCpfCnpj());
                    return clienteRepository.save(cliente);
                 })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado" ) );
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -55,6 +55,6 @@ public class ClienteResource {
                      clienteRepository.delete(cliente);
                      return Void.TYPE;
                  })
-                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
+                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado, impossivel deletar") );
     }
 }
