@@ -2,6 +2,7 @@ package br.com.githubvini.application.model.entities;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -37,6 +38,12 @@ public class ServicoPrestado {
     private BigDecimal valor;
 
     /**
+     * Representa a data que o serviço foi prestado.
+     */
+    @Column
+    private LocalDate data;
+
+    /**
      * Construtor padrão.
      */
     public ServicoPrestado() { }
@@ -48,11 +55,12 @@ public class ServicoPrestado {
      * @param cliente - Cliente - cliente.
      * @param valor - BigDecimal - valor do serviço.
      */
-    public ServicoPrestado(Integer id, String descricao, Cliente cliente, BigDecimal valor) {
+    public ServicoPrestado(Integer id, String descricao, Cliente cliente, BigDecimal valor, LocalDate data) {
         this.id = id;
         this.descricao = descricao;
         this.cliente = cliente;
         this.valor = valor;
+        this.data = data;
     }
 
     /**
@@ -120,6 +128,22 @@ public class ServicoPrestado {
     }
 
     /**
+     * Metodo get().
+     * @return data - LocalDate - data do serviço prestado.
+     */
+    public LocalDate getData() {
+        return this.data;
+    }
+
+    /**
+     * Metodo set().
+     * @param data - LocalDate - data do serviço prestado.
+     */
+    public void setData(final LocalDate data) {
+        this.data = data;
+    }
+
+    /**
      * Metodo equals to compare only by id.
      * @param o
      * @return id.
@@ -148,6 +172,7 @@ public class ServicoPrestado {
                 "DESCRIÇÃO DO SERVIÇO: " + descricao + '\'' +
                 "CLIENTE: " + cliente + '\n' +
                 "VALOR DO SERVIÇO: " + valor + '\n' +
+                "DATA DO SERVIÇO PRESTADO: " + data + '\n' +
                 '}';
     }
 }

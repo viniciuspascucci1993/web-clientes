@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Classe responsável por ser o provedor e controlador ou resource da aplicação.
@@ -15,6 +16,7 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping(value = "/api/clientes")
+@CrossOrigin("http://localhost:4200")
 public class ClienteResource {
 
     @Autowired
@@ -25,6 +27,11 @@ public class ClienteResource {
         return clienteRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado")
         );
+    }
+
+    @RequestMapping( method = RequestMethod.GET)
+    public List<Cliente> findAll() {
+        return clienteRepository.findAll();
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -40,7 +47,7 @@ public class ClienteResource {
                 .findById(id)
                 .map(cliente -> {
                    cliente.setNome(clienteAtualizado.getNome());
-                   cliente.setCpfCnpj(clienteAtualizado.getCpfCnpj());
+                   cliente.setCpf(clienteAtualizado.getCpf());
                    return clienteRepository.save(cliente);
                 })
                 .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado" ) );

@@ -33,13 +33,12 @@ public class Cliente {
     private String nome;
 
     /**
-     * Representa o cpf ou cnpj do cliente.
+     * Representa o cpf ou do cliente.
      */
     @Column(nullable = false, length = 14)
     @NotNull(message = "{campo.cpf.obrigatorio}")
     @CPF(message = "{campo.cpf.invalido}")
-    @CNPJ
-    private String cpfCnpj;
+    private String cpf;
 
     /**
      * Representa d data de cadastro desse cliente.
@@ -62,13 +61,13 @@ public class Cliente {
      * Construtor com parâmetros.
      * @param id - Integer - identificador cliente.
      * @param nome - String - nome do cliente.
-     * @param cpfCnpj - String - CPF/CNPJ do cliente.
+     * @param cpf - String - CPF do cliente.
      * @param dataCadastro - LocalDate - data de caddastro desse cliente.
      */
-    public Cliente(Integer id, String nome, String cpfCnpj, LocalDate dataCadastro) {
+    public Cliente(Integer id, String nome, String cpf, LocalDate dataCadastro) {
         this.id = id;
         this.nome = nome;
-        this.cpfCnpj = cpfCnpj;
+        this.cpf = cpf;
         this.dataCadastro = dataCadastro;
     }
 
@@ -106,18 +105,18 @@ public class Cliente {
 
     /**
      * Metodo get().
-     * @return cpfCnpj - String - cpf ou cnpj do cliente.
+     * @return cpf - String - cpf do cliente.
      */
-    public String getCpfCnpj() {
-        return this.cpfCnpj;
+    public String getCpf() {
+        return this.cpf;
     }
 
     /**
      * Metodo set().
-     * @param cpfCnpj - String - cpf ou cnpj do cliente.
+     * @param cpf - String - cpf do cliente.
      */
-    public void setCpfCnpj(final String cpfCnpj) {
-        this.cpfCnpj = cpfCnpj;
+    public void setCpf(final String cpf) {
+        this.cpf = cpf;
     }
 
     /**
@@ -163,7 +162,7 @@ public class Cliente {
         return "Cliente{" +
                 "IDENTIFICADOR CLIENTE: " + id + '\n' +
                 "NOME CLIENTE: " + nome + '\'' +
-                "CPF OU CNPJ DO CLIENTE: " + cpfCnpj + '\'' +
+                "CPF DO CLIENTE: " + cpf + '\'' +
                 "DATA DE CADASTRO DO CLIENTE: " + dataCadastro +
                 '}';
     }
