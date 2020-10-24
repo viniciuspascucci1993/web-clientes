@@ -1,5 +1,7 @@
 package br.com.githubvini.application.model.entities.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -12,21 +14,25 @@ public class ServicoPrestadoDTO {
     /**
      * Representa a descrição do serviço.
      */
+    @NotEmpty(message = "{campo.descricao.obrigatorio}")
     private String descricao;
 
     /**
      * Representa o valor do servço.
      */
+    @NotEmpty(message = "{campo.preco.obrigatorio}")
     private String preco;
 
     /**
      * Representa a data do serviiço prestado.
      */
+    @NotEmpty(message = "{campo.data.obrigatorio}")
     private String data;
 
     /**
      * Representa o id do cliente.
      */
+    @NotNull(message = "{campo.cliente.obrigatorio}")
     private Integer idCliente;
 
     /**
