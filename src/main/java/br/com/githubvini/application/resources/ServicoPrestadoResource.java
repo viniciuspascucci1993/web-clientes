@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -53,6 +54,13 @@ public class ServicoPrestadoResource {
         servicoPrestado.setValor( convert.convert(dto.getPreco()) );
 
         return servicoPrestadoRepository.save(servicoPrestado);
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public List<ServicoPrestado> search( @RequestParam(value = "nome", required = false, defaultValue = "") String nome,
+                                         @RequestParam( value = "mes", required = false) Integer mes) {
+
+        return servicoPrestadoRepository.findByNomeClienteAndMes("%" + nome + "%" , mes);
     }
 
 }
