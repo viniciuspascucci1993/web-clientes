@@ -3,6 +3,7 @@ package br.com.githubvini.application.model.entities;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
@@ -32,6 +33,7 @@ public class Usuario {
      * Representa a senha.
      */
     @Column
+    @NotEmpty(message = "{campo.senha.obrigatorio}")
     private String password;
 
     /**

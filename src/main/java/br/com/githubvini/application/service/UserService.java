@@ -2,6 +2,7 @@ package br.com.githubvini.application.service;
 
 import br.com.githubvini.application.model.entities.Usuario;
 import br.com.githubvini.application.repositories.UsuarioRepository;
+import br.com.githubvini.application.service.exception.UsuarioCadastradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,15 @@ public class UserService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    public Usuario insert( Usuario usuario ) {
+        boolean exists = usuarioRepository.existsByCpf(usuario.getCpf());
+
+        if (exists) {
+            throw new UsuarioCadastradoException(usuario.getCpf());
+        }
+        return usuarioRepository.save(usuario);
+    }
 
     @Override
     public UserDetails loadUserByUsername( String cpf ) throws UsernameNotFoundException {
