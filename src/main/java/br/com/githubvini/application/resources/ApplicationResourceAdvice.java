@@ -34,7 +34,7 @@ public class ApplicationResourceAdvice {
     @ExceptionHandler( ResponseStatusException.class )
     public ResponseEntity handleResponseStatusException(ResponseStatusException ex) {
 
-        String messageErro = ex.getMessage();
+        String messageErro = ex.getReason();
         HttpStatus statusCode = ex.getStatus();
 
         ApiErrors apiErrors = new ApiErrors(messageErro);
