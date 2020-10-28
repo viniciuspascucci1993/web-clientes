@@ -1,10 +1,15 @@
 package br.com.githubvini.application.configuration;
 
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -15,14 +20,25 @@ import org.springframework.web.filter.CorsFilter;
 public class WebConfig {
 
     @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    public FilterRegistrationBean<CorsFilter> corsFilterFilterRegistrationBean() {
+
+        List<String> allOrigins = Arrays.asList("*");
         CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowedOrigins(allOrigins);
+        config.setAllowedHeaders(allOrigins);
+        config.setAllowedMethods(allOrigins);
+
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
+
+        CorsFilter corsFilter = new CorsFilter(source);
+        FilterRegistrationBean<CorsFilter> filter = new FilterRegistrationBean<>(corsFilter);
+
+        filter.setOrder(Ordered.HIGHEST_PRECEDENCE);
+
+        return filter;
     }
 }
